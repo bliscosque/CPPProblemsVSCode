@@ -18,13 +18,53 @@ int calculate(vector<vector<int>> grid) {
     return sum;
 }
 
+void print(vector<vector<int>> grid) {
+    int nlin=grid.size();
+    int ncol=grid[0].size();
+    cout << "GRID: " << endl;
+    //change lines that has first elem not 0
+    for (int i=0;i<nlin;i++) {
+        for (int j=0;j<ncol;j++) {
+            cout << grid[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
 
 int matrixScore(vector<vector<int>> grid) {
+<<<<<<< HEAD
     int max = calculate(grid);
     int sizeT=grid.size()*grid[0].size();
     for (int b=0; b<(1<<sizeT);b++) {
         
+=======
+    int nlin=grid.size();
+    int ncol=grid[0].size();
+    //change lines that has first elem not 0
+    for (int i=0;i<nlin;i++) {
+        if (grid[i][0]==0) {
+            for (int j=0;j<ncol;j++) {
+                grid[i][j]=grid[i][j]==0?1:0;
+            }
+        }
     }
+    //print(grid);
+    //change columns that have more 0s than 1s, except first column that have all elements=1
+    for (int j=1;j<ncol;j++) {
+        int sum=0;
+        for (int i=0;i<nlin;i++) {
+            sum+=grid[i][j];
+        }
+        if (sum <= nlin/2) {
+            for (int i=0;i<nlin;i++) {
+                grid[i][j]=grid[i][j]==0?1:0;
+            }
+        }
+>>>>>>> b36eef9560e3207fe90e43bf812d6ce3c9507d34
+    }
+    //print(grid);
+    return calculate(grid);
 }
 
 int main() {
