@@ -7,11 +7,11 @@ using namespace std;
 string getSuffix(string s1, string s2) {
     int l1=s1.size();
     int l2=s2.size();
-    cout << "getS: " << s1 << " " << s2 << endl;
+    //cout << "getS: " << s1 << " " << s2 << endl;
     for (int j=max(0,l1-l2);j<l1;j++) {
-        cout << "j: " << j << endl;
-        cout << "s1.substr(j): " << s1.substr(j) << endl;
-        cout << "s2.substr(0,l1-j): " << s2.substr(0,l1-j) << endl;
+        //cout << "j: " << j << endl;
+        //cout << "s1.substr(j): " << s1.substr(j) << endl;
+        //cout << "s2.substr(0,l1-j): " << s2.substr(0,l1-j) << endl;
         if (s1.substr(j)==s2.substr(0,l1-j))
             return s2.substr(l1-j);
     }
@@ -23,13 +23,13 @@ string shortestSuperstring(vector<string> words) {
     int size=words.size();
     if (size==1) return words[0];
     map<int,vector<string>> dp;
-    vector<vector<string>> memo; //TODO: MEMO has to be initialized
+    vector<vector<string>> memo(size,vector<string>(size,"")); 
     
     for (int j=0;j<size;j++) {
         for (int k=0;k<size;k++) {
             if (j==k) continue;
             memo[j][k]=getSuffix(words[j],words[k]);
-            cout << "memo " << j << " " << k << " " << memo[j][k];
+            //cout << "memo " << j << " " << k << " " << memo[j][k];
             dp[(1<<j)|(1<<k)].push_back(words[j]+memo[j][k]);
         }
     }
@@ -40,7 +40,44 @@ string shortestSuperstring(vector<string> words) {
         }
         cout << endl;
     } 
-    return "";
+
+    //merge values in map
+    for (int n=3;n<=size;n++) {
+        map<int,vector<string>> next;
+        for (auto a: dp) {
+            int key=a.first;
+            cout << "key: " << key << endl;
+            vector<string> arr=a.second;
+            for (int j=0;j<arr.size();j++) {
+                for (int k=0;k<size;k++) {
+                    cout << "j: " << j << " k: " << k << endl;
+                    //if ((key & (1<<k)) != 0) continue;
+                    vector<string> arr2=next[key|(1<<k)];
+                    if (k>arr2.size()) continue;
+                    cout << "arr2[k]: " << arr2[k] << " memo[j][k]: " << memo[j][k] << endl;
+                    if (arr2[k].length() > arr[j].length() + memo[j][k].length()) {
+                        arr2[k] = arr[j] + memo[j][k];
+                    }
+                }
+            }
+            
+        }
+        dp=next;
+        for (auto i:dp) {
+            cout << i.first << " ";
+            for (auto j: i.second) {
+                cout << j<< ",";
+            }
+            cout << endl;
+        } 
+    }
+    cout << "outside for" << endl;
+    string res=dp[((1<<size)-1)][0];
+    for (string s:dp[((1<<size)-1)]) {
+        if (res.length() > s.length()) 
+            res=s;
+    }
+    return res;
 }
 
 int main() {
