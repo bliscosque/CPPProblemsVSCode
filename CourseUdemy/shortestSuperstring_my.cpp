@@ -43,26 +43,16 @@ string shortestSuperstring(vector<string> words) {
 
     //merge values in map
     for (int n=3;n<=size;n++) {
-        map<int,vector<string>> next;
         for (auto a: dp) {
             int key=a.first;
             cout << "key: " << key << endl;
             vector<string> arr=a.second;
             for (int j=0;j<arr.size();j++) {
-                for (int k=0;k<size;k++) {
                     cout << "j: " << j << " k: " << k << endl;
-                    //if ((key & (1<<k)) != 0) continue;
-                    vector<string> arr2=next[key|(1<<k)];
-                    if (k>arr2.size()) continue;
-                    cout << "arr2[k]: " << arr2[k] << " memo[j][k]: " << memo[j][k] << endl;
-                    if (arr2[k].length() > arr[j].length() + memo[j][k].length()) {
-                        arr2[k] = arr[j] + memo[j][k];
-                    }
-                }
+                    dp[(key & (1<<k))].push_back(arr[j] + memo[j][k]);
             }
             
         }
-        dp=next;
         for (auto i:dp) {
             cout << i.first << " ";
             for (auto j: i.second) {
