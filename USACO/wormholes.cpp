@@ -13,6 +13,7 @@ int x[20], y[20], nex[20], paired[20], part[20];
 
 bool check() {
     for (int s=1;s<=n;s++) {
+        //does there exist a cycle starting from start?
         int cur=s;
         for (int it=1;it<=n;it++) cur=part[nex[cur]];
         if (cur) return true;
@@ -23,8 +24,8 @@ bool check() {
 void dfs() {
     int f=1;
     while (paired[f] && f<=n) f++;
-    if (f==n+1) { //check
-        if (check()) ans++;
+    if (f==n+1) { //everyone is paired
+        if (check()) ans++; //check if cycle exists
     }
     for (int s=f+1;s<=n;s++) {
         if (!paired[s]) {
