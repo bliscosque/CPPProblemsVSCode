@@ -4,7 +4,7 @@ using namespace std;
 
 //https://palak001.medium.com/spoj-locker-magic-of-the-locker-a758bccf432f
 
-ll mod=1e10+7;
+ll mod=1e9+7;
 
 ll binPow(ll a, ll n) {
     if (n==0) return 1;
