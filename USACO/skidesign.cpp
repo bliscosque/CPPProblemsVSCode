@@ -5,8 +5,11 @@ LANG: C++
 */
 /* LANG can be C++11 or C++14 for those more recent releases */
 #include<bits/stdc++.h>
+#include<math.h>
 using namespace std;
 
+//help from:
+//https://www.youtube.com/watch?v=NwOXXtCk4Xo
 
 int main() {
 	ofstream fout("skidesign.out");
@@ -18,19 +21,29 @@ int main() {
         fin >> h;
         hills.push_back(h);
     }
+    int pTotMin=INT_MAX; 
+    int vmin; 
+    int vmax=17;
+    
+    for (int i=0;i<100-17;i++) {
+        vmin=i;
+        vmax=vmin+17;
+        int pTot=0;
+        for (int j=0;j<nhills;j++) {
+            //cout << "testing: "<< vmin << " " << vmax <<endl;
+            if (hills[j] < vmin) {
+                pTot+=pow((vmin-hills[j]),2);
+            }
+            if (hills[j] > vmax) {
+                pTot+=pow((hills[j]-vmax),2);
+            }
 
-    sort(hills.begin(), hills.end());
-    int hmin=hills[0];
-    int hmax=hills[nhills-1];
-    cout << hmin << " " << hmax << endl;
+        }
+        //cout << "tot" << pTot << endl;
+        pTotMin=min(pTotMin,pTot);
+    }
 
-    int conv_amt=hmax-hmin-17;
-    cout << conv_amt << endl;
-    int v1=conv_amt/2;
-    int v2=conv_amt-v1;
-    cout << v1 << " " << v2 << endl;
-    int pTot=v1*v1+v2*v2;
-    fout << pTot << endl; 
+    fout << pTotMin << endl; 
     
 
     return 0;
