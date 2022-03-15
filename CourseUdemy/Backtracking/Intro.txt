@@ -1,0 +1,4 @@
+Problem types
+- decision Problem - feasible solution
+- optimisation problem - best solution
+- enumeration problem - find all solutions
