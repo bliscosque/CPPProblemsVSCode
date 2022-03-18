@@ -23,7 +23,7 @@ vector<string> letterCombinations(string digits) {
     
     mm.insert({"2","a"});
     mm.insert({"2","b"});
-    mm.insert({"2","b"});
+    mm.insert({"2","c"});
     mm.insert({"3","d"});
     mm.insert({"3","e"});
     mm.insert({"3","f"});
@@ -49,6 +49,7 @@ vector<string> letterCombinations(string digits) {
     mm.insert({"9","z"});
 
     vector<string> ans;
+    if (digits == "") return ans;
     letterCombRec(ans,digits,0,"");
     sort(ans.begin(),ans.end());
     return ans;
