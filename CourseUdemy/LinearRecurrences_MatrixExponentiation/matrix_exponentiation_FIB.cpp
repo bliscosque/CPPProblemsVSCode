@@ -12,23 +12,46 @@ struct Mat {
     }
     void identity() { //matrix with diagonal=1
         for (int i=0;i<sz;i++) {
-            m[sz][sz]=1;
+            m[i][i]=1;
         }
     }
     Mat operator* (Mat a) { //overload of *
-
+         Mat res;
+         for (int i = 0; i < sz; i++) {
+             for (int j = 0; j < sz; j++) {
+               for (int k = 0; k < sz; k++) {
+                   res.m[i][j] += m[i][k] * a.m[k][j];
+                   res.m[i][j] %= mod;
+               }
+                 
+             }
+         }
+         return res;
     }
 };
 
 int Fib(int n) {
-    Mat r, q;
-    r=r * q;
+    Mat res;
+    res.identity();
+    Mat T;
+    T.m[0][0]=T.m[0][1]=T.m[1][0]=1;
+
+    if (n<=2) return 1;
+    n -= 2;
+
+    while (n) {
+        if (n&1) res = res*T;
+        T=T*T;
+        n/=2;
+    }
+
+    return (res.m[0][0] + res.m[0][1])%mod;
+
 }
 
 int32_t main() {
-    int n=5;
 
-    cout << Fib(5) << endl;
+    cout << Fib(10) << endl;
 
     return 0;
 }
