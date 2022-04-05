@@ -39,6 +39,8 @@ int Fib(int n) {
     if (n<=2) return 1;
     n -= 2;
 
+
+    //log (N) complexity * sz^3
     while (n) {
         if (n&1) res = res*T;
         T=T*T;
