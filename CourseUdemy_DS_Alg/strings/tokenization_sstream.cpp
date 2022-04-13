@@ -1,6 +1,6 @@
 //split a string in tokens
-//1) Stringstream
-//2) 
+//1) stringstream
+//2) strtok(on char style string)
 
 #include <iostream>
 #include <sstream>
