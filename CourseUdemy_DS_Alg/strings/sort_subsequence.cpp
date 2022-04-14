@@ -1,3 +1,5 @@
+//generate all subsequences, print ordered by size, lexicographical
+
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -7,7 +9,7 @@ using namespace std;
 
 bool comp(string a, string b) {
     if (a.length() == b.length()) return a<b;
-    
+
     if (a.length() < b.length())
         return true;
     return false;
