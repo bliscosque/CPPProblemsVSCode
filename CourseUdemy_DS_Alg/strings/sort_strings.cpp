@@ -30,15 +30,18 @@ output
 #include <vector>
 #include <cstring>
 #include <algorithm>
+#include <sstream>
 using namespace std;
 
 string extractStringAtKey(string str,int key) {
-    char *s = strtok((char *)str.c_str(), " ");
+    stringstream ss(str);
+
+    string token;
     while (key>1) {
-        s=strtok(NULL, " ");
+        getline(ss,token, ' ');
         key--;
     }
-    return (string)s;
+    return token;
 }
 
 int convertToInt(string s) {
@@ -86,10 +89,10 @@ int main() {
     string reversal,ordering;
     cin >>key>>reversal >>ordering; //does not include white spaces
 
-    for (auto a:v) {
-        cout << "V: " << a << endl;
-    }
-    cout << endl;
+    // for (auto a:v) {
+    //     cout << "V: " << a << endl;
+    // }
+    // cout << endl;
     
     //1. extract keys
     vector<pair<string,string>> vp;
@@ -97,6 +100,7 @@ int main() {
     for (int i=0;i<n;i++) {
         cout << "vi: " << v[i] << endl;
         vp.push_back({v[i],extractStringAtKey(v[i],key)});
+        cout << vp[i].first << endl;
     }
 
         
