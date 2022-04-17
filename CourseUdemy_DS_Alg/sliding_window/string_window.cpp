@@ -37,6 +37,7 @@ string stringWindow(string big, string small) {
 
     for (int i = 0; i < big.length(); i++)
     {
+        //cout << "main for: " << i << endl;
         char ch=big[i];
         //expanding current windows - including current char
         freq_str[ch]++;
@@ -44,13 +45,15 @@ string stringWindow(string big, string small) {
         //count how many char have been matched until now (string and small(pattern))
         if (freq_small[ch]!=0 && freq_str[ch] <= freq_small[ch]) {
             count++;
+            //cout << "incrementing count: " << count << endl;
         }
 
         //if all char os small were found in current window, can start contraction
         if (count==small.length()) {
+            //cout << "Count==small" << endl;
             //start removing from left unwanted char (1 - not present in small / 2 - freq is > required)
             while (freq_small[big[start]]==0 || freq_str[big[start]]>freq_small[big[start]]) {
-                freq_str[big[start]]++;
+                freq_str[big[start]]--;
                 start++;
             }
 
@@ -65,7 +68,7 @@ string stringWindow(string big, string small) {
 
     if (start_idx==-1) return "No window found";
 
-    cout << start_idx << " " << min_so_far << endl;
+    //cout << start_idx << " " << min_so_far << endl;
     
     return big.substr(start_idx,min_so_far);
     
