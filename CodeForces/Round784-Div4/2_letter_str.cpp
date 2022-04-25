@@ -19,7 +19,9 @@ int main() {
             cout << 0 << endl;
         }
         else {
-
+            for (int i=0;i<n;i++) {
+                for (int )
+            }
         }
 
         tc--;
