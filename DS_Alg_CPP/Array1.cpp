@@ -1,3 +1,8 @@
+//to see memory leaks, compile with:
+//clang++ -std=c++14 -fsanitize=address -g -O1 Array1.cpp
+//-g -> additional debug information
+//-O1 -> enable basic optimizations
+
 class IntArray {
     private:
         int* m_ptr{nullptr}; //direct member initialization (C++11)
@@ -11,6 +16,10 @@ class IntArray {
                 m_ptr=new int[size]{}; //{} inicialize with 0. Without it... will inicialize with garbage
                 m_size=size;
             }
+        }
+
+        ~IntArray() { //destructor
+            delete[] m_ptr;
         }
 
         int Size() const { //const -> does not modify internal values of IntArray
