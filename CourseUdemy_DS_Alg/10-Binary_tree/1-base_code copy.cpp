@@ -16,7 +16,7 @@ public:
 };
 
 //Input: 1 2 4 -1 -1 5 7 -1 -1 -1 3 -1 6 -1 -1
-node* buildTree() {
+node* buildTree() { //preordered build (root, left, right)
     int d;
     cin >> d;
     if (d==-1) {
@@ -27,4 +27,10 @@ node* buildTree() {
     n->left=buildTree();
     n->right=buildTree();
     return n;
+}
+
+int main() {
+    node*root = buildTree();
+
+    return 0;
 }
