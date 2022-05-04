@@ -64,9 +64,34 @@ void levelOrderPrint(node*root) {
 }
 
 
+//1 2 3 4 5 -1 6 -1 -1 7 -1 -1 -1 -1 -1
+node* levelOrderBuild() {
+    int d;
+    cin >> d;
+    node*root = new node(d);
+
+    queue<node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        node* current = q.front();
+        q.pop();
+        int c1,c2;
+        cin >> c1 >> c2;
+        if (c1!=-1) {
+            current->left=new node(c1);
+            q.push(current->left);
+        }
+        if (c2!=-1) {
+            current->right=new node(c2);
+            q.push(current->right);
+        }
+    }
+    return root;
+}
 
 int main() {
-    node*root = buildTree();
+    node*root = levelOrderBuild();
     levelOrderPrint(root);    
 
     return 0;
