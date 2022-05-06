@@ -60,7 +60,10 @@ int main() {
         root=insert(root,x);
     }
     printInOrder(root);
-    
+    cout << endl;
+    cout <<isPresent(root,3) << endl;
+    cout <<isPresent(root,13) << endl;
+    cout <<isPresent(root,99) << endl;
 
     return 0;
 }
