@@ -44,7 +44,7 @@ void merge(vector<int> &vi, int p, int q, int r) {
         k++;
     }
     while (j<nR) {
-        vi[k]=R[k];
+        vi[k]=R[j];
         j++;
     }
 }
