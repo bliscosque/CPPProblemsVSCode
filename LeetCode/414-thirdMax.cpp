@@ -8,6 +8,10 @@ public:
         for (auto a:nums) {
             s.insert(a);
         }
+
+        //pode passar tudo de uma vez, no construtor do set:
+        //set<int> s(nums.begin(),nums.end());
+
         if (s.size() >=3) {
             auto a=s.end();
             a--;
