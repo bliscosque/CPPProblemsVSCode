@@ -9,12 +9,11 @@ int main() {
     int tc;
     cin >> tc;
     while (tc>0) {
-        int n;
+        long long int n;
         cin >> n;
         if (n==0) cout << 0 << endl;
         else {
-            double sqr=sqrt(1+8*n);
-            int res=(-1+ceil(sqrt(1+8*n)))/2;
+            long long int res=(-1+sqrt(1+8*n))/2;
             cout << res << endl;
         }
         tc--;
@@ -22,5 +21,3 @@ int main() {
 
     return 0;
 }
-
-//wrong answer
