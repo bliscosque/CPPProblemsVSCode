@@ -17,3 +17,47 @@
 
 //7
 
+#include <bits/stdc++.h>
+using namespace std;
+
+//recursive
+int countWays(int n, int k) {
+    if (n==0) {
+        return 1;
+    }
+    if (n<0) {
+        return 0;
+    }
+    //recursive case
+    int ans=0;
+    for (int jump=1;jump<=k;jump++) {
+        ans+=countWays(n-jump,k);
+    }
+    return ans;
+}
+
+//top Down
+int countWaysDP(int n, int k, vector<int> dp) {
+    if (n==0) {
+        return 1;
+    }
+    if (n<0) {
+        return 0;
+    }
+    if (dp[n]!=0) { //check if state is already computed (DP)
+        return dp[n];
+    }
+    //recursive case
+    int ans=0;
+    for (int jump=1;jump<=k;jump++) {
+        ans+=countWaysDP(n-jump,k,dp);
+    }
+    return dp[n]=ans;//atualizando DP
+}
+
+int main() {
+    int n=4,k=3;
+    cout << countWays(n,k) << endl;
+    cout << countWaysDP(n,k,vector<int>(1000,0)) << endl;
+    return 0;
+}
