@@ -1,3 +1,11 @@
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem106.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode id=106 lang=cpp
  *
@@ -33,25 +41,31 @@
  */
 class Solution {
 public:
+
+    //i2 and p2 is 1 passed of last eleme
     TreeNode* buildTreeRec(vector<int>& inorder, int i1, int i2, vector<int>& postorder, int p1, int p2) {
-        int r=postorder[p2];
+        if (i1>=i2 || p1>=p2) {
+            return nullptr;
+        }
+        int r=postorder[p2-1];
         TreeNode* root=new TreeNode(r);
 
         int i;
         for (i=i1;i<=i2;i++) {
-            if (inorder[i]==p2) break;
+            if (inorder[i]==r) break;
         }
-        int n_elem=i1-i;
-        if (n_elem>=1) {
-            root->left=buildTreeRec(inorder,i1,i-1,postorder,p1,p1+n_elem);
-            root->right=buildTreeRec(inorder,i+1,i,postorder,p1+n_elem,p2);
-        }
+        int n_elem_l=i-i1;
+
+        root->left=buildTreeRec(inorder,i1,i1+n_elem_l,postorder,p1,p1+n_elem_l);
+        root->right=buildTreeRec(inorder,i1+n_elem_l+1,i2,postorder,p1+n_elem_l,p2-1);
+
         return root;
 
     }
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         int n=inorder.size();
-        return buildTreeRec(inorder,0,n-1,postorder,0,n-1);
+        if (n==0) return nullptr;
+        return buildTreeRec(inorder,0,n,postorder,0,n);
     }
 };
 // @lc code=end
