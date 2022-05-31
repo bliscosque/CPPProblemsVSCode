@@ -1,4 +1,4 @@
-//every graph that does not contain a cycle, ir a tree
+//every graph that does not contain a cycle, is a tree
 //if have a cycle, have a way to visit a node more than once
    //neighbor cannot be parent of node no DFS
 //pode usar BFS ou DFS
