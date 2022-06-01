@@ -13,6 +13,24 @@ int min_jumps(vector<int> arr, int n, vector<int> dp, int i=0) {
     if (i>=n) {
         return INT_MAX; //além da matriz... infinito
     }
+    //rec case
+    //using DP, if already calculated
+    if (dp[i]!=0) {
+        return dp[i];
+    }
+    //assume
+    int steps=INT_MAX;
+    int max_jump=arr[i];
+
+    for (int jump=1;jump<=max_jump;jump++) {
+        int next_idx=i+jump;
+        int subprob=min_jumps(arr,n,dp,next_idx);
+        if (subprob!=INT_MAX) {
+            steps=min(steps,subprob+1);
+        }
+    }
+
+    return dp[i]=steps;
 }
 
 int main() {
