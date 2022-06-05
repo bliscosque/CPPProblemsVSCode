@@ -41,6 +41,42 @@ void insertLinkedList(node* &head, int data, int pos) {
     }
 }
 
+void deleteFromLinkedList(node* &head, int pos) {
+    if (head==nullptr) return;
+    if (pos==0) {
+        node* p=head;
+        head=head->next;
+        delete p;
+        return;
+    }
+    else {
+        int i=1;
+        node *prev, *cur;
+        prev=head;
+        cur=prev->next;
+        while (i<pos) {
+            if (cur->next==nullptr) {
+                cout << "elem does not exist" << endl;
+                return;
+            }
+            cur=cur->next;
+            prev=prev->next;
+            i++;
+        }
+        prev->next=cur->next;
+        delete cur;
+    }
+}
+
+void deleteLinkedList(node * &head) {
+    node* tmp;
+    while (head!=nullptr) {
+        tmp=head;
+        head=head->next;
+        delete tmp;
+    }
+}
+
 int main() {
     node* head=new node(10);
     head->next=new node(20);
@@ -54,6 +90,30 @@ int main() {
         p=p->next;
     }
     cout << endl;
+
+    deleteFromLinkedList(head,0);
+
+    cout << nodeCount(head) << endl;
+    p=head;
+    while (p!=NULL) {
+        cout << p->data << "-->";
+        p=p->next;
+    }
+    cout << endl;
+
+    deleteFromLinkedList(head,3);
+    deleteFromLinkedList(head,2);
+    
+    cout << nodeCount(head) << endl;
+    p=head;
+    while (p!=NULL) {
+        cout << p->data << "-->";
+        p=p->next;
+    }
+    cout << endl;
+
+    deleteLinkedList(head);
+    cout << nodeCount(head);
 
     return 0;
 }
