@@ -1,18 +1,9 @@
-// @before-stub-for-debug-begin
-#include <vector>
-#include <string>
-#include "commoncppproblem33.h"
-
-using namespace std;
-// @before-stub-for-debug-end
-
 /*
  * @lc app=leetcode id=33 lang=cpp
  *
  * [33] Search in Rotated Sorted Array
  */
-//20220527
-//20220528
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -23,29 +14,32 @@ public:
         int s=0;
         int e=nums.size()-1;
         while (s<=e) {
-            int mid=s+(e-s)/2;
-
-            if (nums[mid]==target) return mid;
-
-            if (nums[s]<=nums[mid]) { //parte da esquerda esta ordenada
-                if (target>=nums[s] && target <=nums[mid]) {
-                    e=mid-1;
+            int m=s+(e-s)/2;
+            if (nums[m]==target) return m;
+            if (nums[m]>=nums[s]) { //primeira parte
+                if (target > nums[m]) {
+                    s=m+1;
+                }
+                else if (target < nums[m] && target >= nums[s]) {
+                    e=m-1;
                 }
                 else {
-                    s=mid+1;
+                    s=m+1;
                 }
             }
-            else { //parte esquerda nao ordenada
-                if (target>=nums[mid] && target <= nums[e]) { 
-                    s=mid+1;
+            else { //segunda parte
+                if (target<nums[m]) {
+                    e=m-1;
+                }
+                else if (target>nums[m] && target <nums[s]) {
+                    s=m+1;
                 }
                 else {
-                    e=mid-1;
+                    e=m-1;
                 }
-                
             }
-        }
-        return -1;
+        }  
+        return -1;  
     }
 };
 // @lc code=end
