@@ -3,6 +3,7 @@
 using namespace std;
 
 const int P=7, N=1e5;
+int fact[N];
 int addm(int x, int y) {
     return (x+y)%P;
 }
@@ -25,11 +26,18 @@ int powr(int x, int y) {
     return res;
 }
 
+int inv(int x) {
+    return powr(x,P-2);
+}   
+
 int divm(int x, int y) {
-    return mulm(x,powr(y,P-2));
+    return mulm(x, inv(y));
 }
 
-int fact[N];
+int ncr(int n, int r) {  //combinacao de n em r
+    return mulm(mulm(fact[n], inv(fact[r])),inv(fact[n-r]));
+}
+
 void calculate_factorial() {
     fact[0]=1;
     for (int i=1;i<N;i++) {
@@ -45,6 +53,7 @@ int32_t main() {
     cout << divm(56,2) << endl;
     
     calculate_factorial(),
-    cout << fact[5];
+    cout << fact[5] << endl;
+    cout << ncr(5,2) << endl;
     return 0;
 }
